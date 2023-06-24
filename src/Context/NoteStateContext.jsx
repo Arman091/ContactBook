@@ -11,23 +11,7 @@ const initState = {
   UsersItem: { name: "", email: "", phone: " " },
 };
 const reducerfunc = (state, action) => {
-  // if (action.type === "ADD") {
-  //   const {email} = action.item;
-  //   const userExists = state.Users.some(
-  //     (user) =>
-  //       user.email === email 
-  //   );
-
-  //   if (!userExists) {
-  //     return {
-  //       ...state,
-  //     };
-  //   } else {
-  //     return {
-  //       Users: [...state.Users, action.item],
-  //     };
-  //   }
-  // }
+  
   if (action.type === "ADD") {
     const { email } = action.item;
     const userExists = state.Users.some((user) => user.email === email);
@@ -56,11 +40,11 @@ const reducerfunc = (state, action) => {
       Users: updatedList,
     };
   }
-
+// update user
   if (action.type === "UPDATE") {
-    const { id, name, email, phone } = action.user;
+    const { name, email, phone } = action.user;
     const updatedUsers = state.Users.map((user) => {
-      if (user._id === id) {
+      if (user.email === email) {
         return {
           ...user,
           name: name,
@@ -76,6 +60,7 @@ const reducerfunc = (state, action) => {
       Users: updatedUsers,
     };
   }
+
 
   return initState;
 };
@@ -104,8 +89,38 @@ const UserstateContext = ({ children }) => {
     dispatch({ type: "REMOVE", user: user });
   };
 
-  // ! Edit a note
+  // // ! Edit a note
+  // const editNote = async (user) => {
+  //   dispatch({ type: "UPDATE", user: user });
+  // };
+ const isValidEmail = (email) => {
+   // Add your email validation logic here
+   // Return true if the email is valid, false otherwise
+   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   return emailPattern.test(email);
+ };
+ const isValidPhoneNumber = (phone) => {
+   // Add your phone number validation logic here
+   // Return true if the phone number is valid, false otherwise
+   const phonePattern = /^\d{10}$/;
+   return phonePattern.test(phone);
+ };
+
   const editNote = async (user) => {
+    const { name, email, phone } = user;
+
+   
+    // Validation checks
+    if (
+      name.trim() === "" ||
+      !isValidEmail(email) ||
+      !isValidPhoneNumber(phone)
+    ) {
+      // Invalid data, return or show an error message
+      
+      return false;
+    }
+
     dispatch({ type: "UPDATE", user: user });
   };
   let Context = {

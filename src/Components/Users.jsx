@@ -33,10 +33,17 @@ const Users = ({ showAlert }) => {
     e.preventDefault();
     const { name, email, phone } = updateUser;
     const updatedNote = { name, email, phone }; // Create a new object with the correct properties
-    editNote(updatedNote);
-
-    showAlert("User updated successfully", "success");
+    
+    async function upd_ate() {
+      let res = await editNote(updatedNote);
+      if (res === false) {
+        alert(" Trying To Update With Invalid Data")
+      }
+      showAlert("User updated successfully", "success");
+    }
+    upd_ate();
   };
+
 
   return (
     <>
