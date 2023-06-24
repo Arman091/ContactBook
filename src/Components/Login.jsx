@@ -3,16 +3,17 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../Context/NoteStateContext";
 import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = ({ showAlert }) => {
-  
+  const { login } = useContext(AuthContext);
   const history = useHistory();
   const { setUsername } = useContext(UserContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
 
     if (email && password) {
@@ -21,16 +22,19 @@ const Login = ({ showAlert }) => {
         (user) => user.email === email && user.password === password
       );
 
-     
-    
       if (user) {
-          let firstName = "";
-        
+        let firstName = "";
+
         setUsername(firstName);
-        showAlert("login success", "success");
+        async function myentry() {
+          await login(firstName);
+          await showAlert("login success", "success");
+        }
+
+        myentry();
         history.push("/");
       } else {
-        showAlert("invalid credentials", "danger");
+        showAlert("invalid credentials Please Register yourself", "danger");
       }
     } else {
       showAlert("Please fill all the data", "danger");

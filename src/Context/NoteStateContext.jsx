@@ -9,27 +9,43 @@ import { useReducer } from "react";
 const initState = {
   Users: [],
   UsersItem: { name: "", email: "", phone: " " },
- 
 };
 const reducerfunc = (state, action) => {
- if (action.type === "ADD") {
-   const { name, email, phone } = action.item;
-   const userExists = state.Users.some(
-     (user) =>
-       user.email === email && user.name === name && user.phone === phone
-   );
+  // if (action.type === "ADD") {
+  //   const {email} = action.item;
+  //   const userExists = state.Users.some(
+  //     (user) =>
+  //       user.email === email 
+  //   );
 
-   if (!userExists) {
-     return {
-       ...state,
-       Users: [...state.Users, action.item],
-     };
-   }
+  //   if (!userExists) {
+  //     return {
+  //       ...state,
+  //     };
+  //   } else {
+  //     return {
+  //       Users: [...state.Users, action.item],
+  //     };
+  //   }
+  // }
+  if (action.type === "ADD") {
+    const { email } = action.item;
+    const userExists = state.Users.some((user) => user.email === email);
 
-   return state;
- }
+    if (userExists) {
+      // User with the same email already exists, return current state
+      return state;
+    } else {
+      // User with the same email doesn't exist, add the new user to the state
+      return {
+        ...state,
+        Users: [...state.Users, action.item],
+      };
+    }
+  }
 
-// Removing a User
+
+  // Removing a User
   if (action.type === "REMOVE") {
     const { name, email, phone } = action.user;
     const updatedList = state.Users.filter((user) => {
@@ -61,7 +77,6 @@ const reducerfunc = (state, action) => {
     };
   }
 
-
   return initState;
 };
 
@@ -85,14 +100,13 @@ const UserstateContext = ({ children }) => {
   };
 
   // ! Delete a note
- const deleteNote = async (user) => {
-     dispatch({ type: "REMOVE", user:user });
- };
+  const deleteNote = async (user) => {
+    dispatch({ type: "REMOVE", user: user });
+  };
 
   // ! Edit a note
   const editNote = async (user) => {
-      dispatch({ type: "UPDATE", user: user });
-      
+    dispatch({ type: "UPDATE", user: user });
   };
   let Context = {
     Users: newstateSnap.Users,

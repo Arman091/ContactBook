@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { AuthContext } from "../Context/AuthContext";
 const SignUp = ({ showAlert }) => {
-  
+  const { login } = useContext(AuthContext);
   const history = useHistory();
   const [userData, setUserData] = useState({
     name: "",
@@ -20,19 +20,21 @@ const SignUp = ({ showAlert }) => {
     const { name, email, password } = userData;
 
     if (name && email && password) {
-      
       const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
       const userExists = existingUsers.some((user) => user.email === email);
       if (!userExists) {
-        
-           const newUser = { name, email, password };
-           const updatedUsers = [...existingUsers, newUser];
-           localStorage.setItem("users", JSON.stringify(updatedUsers));
+        const newUser = { name, email, password };
+        const updatedUsers = [...existingUsers, newUser];
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        async function redirect() {
+         await login(name);
+         
+         await history.push("/");
+       }
+        redirect();
+        await showAlert("account created successfully", "success");
+        setUserData({ name: "", email: "", password: "" });
 
-        
-           setUserData({ name: "", email: "", password: "" });
-           showAlert("account created successfully", "success");
-           history.push("/");
       } else {
         showAlert("user already exists", "danger");
       }
