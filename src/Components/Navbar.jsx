@@ -29,7 +29,7 @@ const { isAuthenticated } = useContext(AuthContext);
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="#">
-            UserBook
+            Contact List
           </Link>
           <button
             className="navbar-toggler"
@@ -51,7 +51,7 @@ const { isAuthenticated } = useContext(AuthContext);
                     aria-current="page"
                     to="/"
                   >
-                    Users
+                    Contacts
                   </Link>
                 </li>
               )}

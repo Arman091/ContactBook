@@ -70,7 +70,7 @@ const Users = ({ showAlert }) => {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Edit User
+                Edit Contact
               </h5>
               <button
                 type="button"
@@ -151,7 +151,7 @@ const Users = ({ showAlert }) => {
           <h2 style={{ textAlign: "center" }}>Users</h2>
         ) : (
           <h2 style={{ textAlign: "center", marginTop: "20px" }}>
-            Add your first User
+            Add your first Contact
           </h2>
         )}
         {Users?.map((note) => (

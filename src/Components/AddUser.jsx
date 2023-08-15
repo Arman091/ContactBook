@@ -59,7 +59,7 @@ const AddUser = ({ showAlert }) => {
 
   return (
     <div className="my-2">
-      <h2>Add a User</h2>
+      <h2>Add a Contact</h2>
       <Form onSubmit={handleSubmit}>
         <div className="mb-3">
           <Form.Group as={Col} controlId="formName">
@@ -113,7 +113,7 @@ const AddUser = ({ showAlert }) => {
           </Form.Group>
         </div>
         <Button variant="primary" type="submit">
-          Add User
+          Add Contact
         </Button>
       </Form>
     </div>
