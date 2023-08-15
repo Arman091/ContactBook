@@ -59,7 +59,7 @@ const AddNote = ({ showAlert }) => {
 
   return (
     <div className="my-2">
-      <h2>Add a Contact</h2>
+      <h2>Add  Contact</h2>
       <Form onSubmit={handleSubmit}>
         <div className="mb-3">
           <Form.Group as={Col} controlId="formName">

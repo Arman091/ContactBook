@@ -148,7 +148,7 @@ const Users = ({ showAlert }) => {
 
       <div className="row my-3">
         {Users.length > 0 ? (
-          <h2 style={{ textAlign: "center" }}>Users</h2>
+          <h2 style={{ textAlign: "center" }}>Contacts</h2>
         ) : (
           <h2 style={{ textAlign: "center", marginTop: "20px" }}>
             Add your first Contact
