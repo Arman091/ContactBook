@@ -1,14 +1,14 @@
 # User App
 
-## User Can Login/Signup And Can Perform **CRUD** operation With A User List
+## User Can Login/Signup And Can Perform **CRUD** operation With A Contact List
 
 ### key Features
 
 - login
 - signup
 - Local storage
-- Craete User
-- Update User
-- Delete User
+- Craete Contact
+- Update Contact
+- Delete contact
 
 ## Note: To avoid Browser Performance issue Clear Local storage After Testing App
